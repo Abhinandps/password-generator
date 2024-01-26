@@ -5,6 +5,7 @@ import { useGoogleOneTapLogin } from '@react-oauth/google';
 
 import { useStore } from './hooks/useStore';
 import Profile from './components/Profile';
+import Section from './components/Section';
 function App() {
   const { authData } = useStore();
 
@@ -12,7 +13,8 @@ function App() {
   return (
     <div className='App'>
       <GoogleOAuthProvider clientId='226721736694-1kv2noidnlotupms6mgspv5s4hl15oov.apps.googleusercontent.com'>
-        <div>
+        {Object.keys(authData).length === 0 && (
+          <div>
             <GoogleLogin
               useOneTap
               onSuccess={async (credentialResponse) => {
@@ -31,9 +33,18 @@ function App() {
                 console.log('Login Failed');
               }}
             />
-l        </div>
+            l        </div>
+        )}
 
-        <Profile />
+        {
+          Object.keys(authData).length > 0 && (
+            <>
+              {/* <Profile /> */}
+              <Section />
+            </>
+          )
+        }
+
       </GoogleOAuthProvider>
     </div>
   );

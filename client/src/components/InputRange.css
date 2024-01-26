@@ -1,0 +1,14 @@
+/* CustomInputRange.css */
+.custom-input-range {
+    width: 80%;
+    margin: 20px auto;
+}
+
+label {
+    margin: 0 10px;
+}
+
+.input-label {
+    display: block;
+    margin-bottom: 10px;
+}
