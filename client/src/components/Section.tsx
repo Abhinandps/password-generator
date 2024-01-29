@@ -12,11 +12,6 @@ function Section() {
         value: '',
         copied: false,
     })
-    
-
-    useEffect(() => {
-        setGeneratedPassword({ ...generatedPassword, value: '', copied: false })
-    }, [])
 
     const [passwordSettings, setPasswordSettings] = useState({
         length: 20,
@@ -26,7 +21,12 @@ function Section() {
         includeSpecialCharacters: true,
     });
 
-
+    useEffect(() => {
+        (async () => {
+            const updatedPassword = await generatePassword(passwordSettings)
+            setGeneratedPassword({ ...generatedPassword, value: updatedPassword, copied: false })
+        })()
+    }, [])
 
     const handleSettingsChange = async (event: any) => {
         const { name, type, checked, value }: { name: string; type: string, checked?: any, value: any } = event.target;
@@ -34,8 +34,6 @@ function Section() {
         setPasswordSettings(updatedSettings);
         const updatedPassword = await generatePassword(updatedSettings)
         setGeneratedPassword({ ...generatedPassword, value: updatedPassword, copied: false })
-        // Call backend API to generate password based on updatedSettings
-        // setGeneratedPassword(apiCallToUpdatePassword(updatedSettings));
     };
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {

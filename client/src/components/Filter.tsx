@@ -51,6 +51,8 @@ function Filter({ passwordSettings, handleSettingsChange }: any) {
                     onChange={handleSettingsChange}
                 />
             </label>
+
+            <button style={{ backgroundColor: '#16a085' }}>Save</button>
         </div>
     )
 }
