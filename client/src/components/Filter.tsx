@@ -9,7 +9,7 @@ function Filter({ passwordSettings, handleSettingsChange }: any) {
             <InputRange
                 type="range"
                 name="length"
-                min={0}
+                min={4}
                 max={20}
                 step={1}
                 initialValue={passwordSettings.length}

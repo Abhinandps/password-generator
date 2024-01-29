@@ -9,6 +9,10 @@ export class PasswordService {
         try {
             const { length, includeUppercase, includeLowercase, includeNumbers, includeSpecialCharacters } = passwordDto;
 
+            if (!includeUppercase && !includeLowercase && !includeNumbers && !includeSpecialCharacters) {
+                return { password: '' }
+            }
+
             const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
             const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const numberChars = '0123456789';

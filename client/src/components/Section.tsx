@@ -1,9 +1,10 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import image from '../assets/pw-generator.png'
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { IoCopy } from "react-icons/io5";
 import Filter from './Filter';
 import { generatePassword } from '../services/generatePassword';
+import { passwordStatus } from '../utils';
 
 function Section() {
 
@@ -11,6 +12,11 @@ function Section() {
         value: '',
         copied: false,
     })
+    
+
+    useEffect(() => {
+        setGeneratedPassword({ ...generatedPassword, value: '', copied: false })
+    }, [])
 
     const [passwordSettings, setPasswordSettings] = useState({
         length: 20,
@@ -19,6 +25,8 @@ function Section() {
         includeNumbers: true,
         includeSpecialCharacters: true,
     });
+
+
 
     const handleSettingsChange = async (event: any) => {
         const { name, type, checked, value }: { name: string; type: string, checked?: any, value: any } = event.target;
@@ -69,6 +77,34 @@ function Section() {
 
 
                     </div>
+                    {generatedPassword.value && passwordStatus.map((sentence) => {
+                        if (passwordSettings.length >= sentence.minLength && passwordSettings.length <= sentence.maxLength) {
+                            return (
+                                <p key={sentence.text} style={{ fontSize: '12px', textAlign: 'left' }}>
+                                    {sentence.text.split(" ").map((word, index) => {
+                                        if (sentence.strongWords.includes(word)) {
+                                            return <span key={index} style={{ fontWeight: "bold", color: sentence.color }}>{word}</span>;
+                                        }
+                                        return word + " ";
+                                    })}
+                                </p>
+                            );
+                        }
+                        return null;
+                    })}
+
+
+                    {!generatedPassword.value &&
+                        <p key={passwordStatus[0].text} style={{ fontSize: '12px', textAlign: 'left' }}>
+                            {passwordStatus[0].text.split(" ").map((word, index) => {
+                                if (passwordStatus[0].strongWords.includes(word)) {
+                                    return <span key={index} style={{ fontWeight: "bold", color: passwordStatus[0].color }}>{word}</span>;
+                                }
+                                return word + " ";
+                            })}
+                        </p>
+                    }
+
                 </div>
             </div>
 
