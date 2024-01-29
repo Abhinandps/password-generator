@@ -6,12 +6,23 @@ import Filter from './Filter';
 import { generatePassword } from '../services/generatePassword';
 import { passwordStatus } from '../utils';
 
+import { Slide, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+
+
 function Section() {
+
 
     const [generatedPassword, setGeneratedPassword] = useState<{ value: string; copied: boolean; }>({
         value: '',
         copied: false,
     })
+
+    const notify = () => toast.success(`password saved successfully`);
 
     const [passwordSettings, setPasswordSettings] = useState({
         length: 20,
@@ -45,9 +56,18 @@ function Section() {
     }
 
 
-
     return (
         <>
+
+            <button onClick={notify}>Notify!</button>
+
+            <ToastContainer
+                theme="dark"
+                position="bottom-center"
+                pauseOnHover
+                transition={Slide}
+            />
+
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '50px' }}>
                 <div style={{}}>
@@ -112,3 +132,5 @@ function Section() {
 }
 
 export default Section
+
+
