@@ -114,7 +114,7 @@
 
 Ensure you have the following dependencies installed on your system:
 
-* **TypeScript**: `version x.y.z`
+* **TypeScript**: `version 5.1.6`
 
 ### ⚙️ Installation
 
