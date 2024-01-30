@@ -2,6 +2,7 @@ import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { PasswordDto } from "./dto/password.dto";
 import { PasswordService } from "./password.service";
 import { savedPasswordDto } from "./dto/savePassword.dto";
+import { PasswordUpdateDto } from "./dto/passwordUpdateDto";
 
 
 
@@ -25,5 +26,10 @@ export class PasswordController {
     @Get(':email')
     async getPassword(@Param('email') email: string) {
         return await this.passwordService.getPassword(email)
+    }
+
+    @Get(':Id')
+    async updatePassword(@Param('Id') Id: string, @Body() passwordUpdateDto: PasswordUpdateDto) {
+        return await this.passwordService.updatePassword(Id, passwordUpdateDto)
     }
 }

@@ -1,9 +1,10 @@
-import { Injectable } from "@nestjs/common";
+import { BadRequestException, Injectable } from "@nestjs/common";
 import { PasswordDto } from "./dto/password.dto";
 import { savedPasswordDto } from "./dto/savePassword.dto";
 import { InjectModel } from "@nestjs/mongoose";
 import { Password, PasswordDocument } from "./schemas/password.schema";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
+import { PasswordUpdateDto } from "./dto/passwordUpdateDto";
 
 @Injectable()
 export class PasswordService {
@@ -66,7 +67,28 @@ export class PasswordService {
                 email: email,
             });
 
+
+            if (!passExists) {
+                throw new BadRequestException('password not found');
+            }
+
             return { res: passExists }
+        } catch (err) {
+
+        }
+    }
+    
+    async updatePassword(Id: string, passwordUpdateDto: PasswordUpdateDto): Promise<{ res: any }> {
+        try {
+            const passExists = await this.passwordModel.findOneAndUpdate({
+                _id: new Types.ObjectId(Id)
+            }, passwordUpdateDto);
+
+            if (!passExists) {
+                throw new BadRequestException('password not found');
+            }
+
+            return { res: 'password updated successfully' }
         } catch (err) {
 
         }
