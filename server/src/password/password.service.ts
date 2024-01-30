@@ -61,7 +61,7 @@ export class PasswordService {
         }
     }
 
-    async getPassword(email: string): Promise<{ res: any }> {
+    async getPasswords(email: string): Promise<{ res: any }> {
         try {
             const passExists = await this.passwordModel.find({
                 email: email,
@@ -77,7 +77,24 @@ export class PasswordService {
 
         }
     }
-    
+
+    async getPassword(Id: string): Promise<{ res: any }> {
+        try {
+
+            const passExists = await this.passwordModel.findOne({
+                _id: new Types.ObjectId(Id)
+            });
+
+            if (!passExists) {
+                throw new BadRequestException('password not found');
+            }
+
+            return { res: passExists }
+        } catch (err) {
+
+        }
+    }
+
     async updatePassword(Id: string, passwordUpdateDto: PasswordUpdateDto): Promise<{ res: any }> {
         try {
             const passExists = await this.passwordModel.findOneAndUpdate({
@@ -89,6 +106,22 @@ export class PasswordService {
             }
 
             return { res: 'password updated successfully' }
+        } catch (err) {
+
+        }
+    }
+
+    async deletePassword(Id: string): Promise<{ res: any }> {
+        try {
+            const passExists = await this.passwordModel.findOneAndDelete({
+                _id: new Types.ObjectId(Id)
+            });
+
+            if (!passExists) {
+                throw new BadRequestException('password not found');
+            }
+
+            return { res: 'password deleted successfully' }
         } catch (err) {
 
         }

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
 import { PasswordDto } from "./dto/password.dto";
 import { PasswordService } from "./password.service";
 import { savedPasswordDto } from "./dto/savePassword.dto";
@@ -24,12 +24,23 @@ export class PasswordController {
 
 
     @Get(':email')
+    async getPasswords(@Param('email') email: string) {
+        return await this.passwordService.getPasswords(email)
+    }
+
+    @Get(':Id')
     async getPassword(@Param('email') email: string) {
         return await this.passwordService.getPassword(email)
     }
 
-    @Get(':Id')
+    @Put(':Id')
     async updatePassword(@Param('Id') Id: string, @Body() passwordUpdateDto: PasswordUpdateDto) {
         return await this.passwordService.updatePassword(Id, passwordUpdateDto)
     }
+
+    @Delete(':Id')
+    async deletePassword(@Param('Id') Id: string) {
+        return await this.passwordService.deletePassword(Id)
+    }
+
 }
