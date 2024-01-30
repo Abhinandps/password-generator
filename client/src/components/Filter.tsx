@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputRange from './InputRange';
 
-function Filter({ passwordSettings, handleSettingsChange }: any) {
+function Filter({ passwordSettings, handleSettingsChange, setPopUp }: any) {
 
 
     return (
@@ -52,7 +52,7 @@ function Filter({ passwordSettings, handleSettingsChange }: any) {
                 />
             </label>
 
-            <button style={{ backgroundColor: '#16a085' }}>Save</button>
+            <button style={{ backgroundColor: '#16a085' }} onClick={() => setPopUp((prev: any) => !prev)}>Save</button>
         </div>
     )
 }

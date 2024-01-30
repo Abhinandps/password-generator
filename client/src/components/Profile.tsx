@@ -10,7 +10,7 @@ const Profile = () => {
 
   return (
     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '80px' }}>
-      {Object.keys(authData).length === 0 ?
+      {authData && Object.keys(authData).length === 0 ?
         (<div style={{ width: '300px' }}>
           <h2 style={{ fontSize: '2.5em' }}>🔐Secure</h2>
           <p style={{ fontSize: '12px' }}>Having strong pass­words is the first step in staying safe online. For full online protection, get F‑Secure Total. Here’s how it changes your life:</p>

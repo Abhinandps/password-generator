@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import PopUp from './PopUp';
 
 
 
@@ -21,6 +22,8 @@ function Section() {
         value: '',
         copied: false,
     })
+
+    const [popUp, setPopUp] = useState(false)
 
     const notify = () => toast.success(`password saved successfully`);
 
@@ -67,7 +70,6 @@ function Section() {
                 pauseOnHover
                 transition={Slide}
             />
-
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '50px' }}>
                 <div style={{}}>
@@ -126,7 +128,11 @@ function Section() {
                 </div>
             </div>
 
-            <Filter passwordSettings={passwordSettings} handleSettingsChange={handleSettingsChange} />
+            <Filter passwordSettings={passwordSettings} setPopUp={setPopUp} handleSettingsChange={handleSettingsChange} />
+
+            {popUp && (
+                <PopUp generatedPassword={generatedPassword} />
+            )}
         </>
     )
 }

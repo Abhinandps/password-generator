@@ -3,12 +3,6 @@ import axios from "axios";
 export const generatePassword = async (passwordDto: any) => {
 
 
-    // if (Object.values(passwordDto).every(value => typeof value === 'boolean') &&
-    //     !Object.values(passwordDto).some(value => value)
-    // ) {
-    //     return '';
-    // }
-
     try {
         const response = await axios.post('http://localhost:3001/api/password/generate', passwordDto, {
             headers: {

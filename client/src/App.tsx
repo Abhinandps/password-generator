@@ -17,14 +17,17 @@ function App() {
   const setAuthData = useStore((state: any) => state.setAuthData);
 
   useEffect(() => {
-    localStorage.setItem('authData', JSON.stringify({}));
+    if (!localStorage.getItem('authData')) {
+      localStorage.setItem('authData', JSON.stringify({}));
+      console.log('called')
+    }
   }, [])
 
   return (
-    <div className={`${Object.keys(authData).length === 0 && 'App'}`}>
+    <div className={`${authData && Object.keys(authData).length === 0 && 'App'}`}>
       <Profile />
       <GoogleOAuthProvider clientId='226721736694-1kv2noidnlotupms6mgspv5s4hl15oov.apps.googleusercontent.com'>
-        {Object.keys(authData).length === 0 && (
+        {authData && Object.keys(authData).length === 0 && (
           <GoogleLogin
             useOneTap
             onSuccess={async (credentialResponse) => {
@@ -45,7 +48,7 @@ function App() {
         )}
 
         {
-          Object.keys(authData).length > 0 && (
+          authData && Object.keys(authData).length > 0 && (
             <Routes>
               <Route index element={<Section />} />
               <Route path='/saved-passwords' element={<SavedPasswords />} />
