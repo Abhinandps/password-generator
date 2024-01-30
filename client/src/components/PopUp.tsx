@@ -59,7 +59,7 @@ function PopUp({ generatedPassword, setPopUp, notify }: any) {
 
             <button style={{ margin: '10px 0', backgroundColor: '#16a085' }} onClick={() => handleSavePassword(passwordDto)} >confirm</button>
 
-            <span style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '20px', cursor: 'pointer' }}><IoMdClose /></span>
+            <span onClick={() => setPopUp((prev: any) => !prev)} style={{ position: 'absolute', top: '20px', right: '20px', fontSize: '20px', cursor: 'pointer' }}><IoMdClose /></span>
 
         </div>
     )
