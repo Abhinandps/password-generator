@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { PasswordDto } from "./dto/password.dto";
 import { PasswordService } from "./password.service";
 import { savedPasswordDto } from "./dto/savePassword.dto";
@@ -19,5 +19,10 @@ export class PasswordController {
     @Post('save')
     async savePassword(@Body() passwordDto: savedPasswordDto): Promise<{ response: string; }> {
         return await this.passwordService.savePassword(passwordDto)
+    }
+
+    @Get(':email')
+    async getPassword(@Param('email') email: string) {
+        return await this.passwordService.getPassword(email)
     }
 }

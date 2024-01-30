@@ -60,4 +60,16 @@ export class PasswordService {
         }
     }
 
+    async getPassword(email: string): Promise<{ res: any }> {
+        try {
+            const passExists = await this.passwordModel.findOne({
+                email: email,
+            });
+
+            return { res: passExists }
+        } catch (err) {
+
+        }
+    }
+
 }
