@@ -67,7 +67,6 @@ function Section() {
     return (
         <>
 
-            <button onClick={notify}>Notify!</button>
 
             <ToastContainer
                 theme="dark"
