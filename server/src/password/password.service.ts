@@ -1,9 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { PasswordDto } from "./dto/password.dto";
+import { savedPasswordDto } from "./dto/savePassword.dto";
+import { InjectModel } from "@nestjs/mongoose";
+import { Password, PasswordDocument } from "./schemas/password.schema";
+import { Model } from "mongoose";
 
 @Injectable()
 export class PasswordService {
-    // constructor(@Injectable)
+    constructor(@InjectModel(Password.name) private passwordModel: Model<PasswordDocument>) { }
 
     async generatePassword(passwordDto: PasswordDto): Promise<{ password: string; }> {
         try {
@@ -35,6 +39,24 @@ export class PasswordService {
         } catch (err) {
             // throw 
             // console.log(err.message)
+        }
+    }
+
+    async savePassword(passwordDto: savedPasswordDto): Promise<{ response: string }> {
+        try {
+            const { email, username, password } = passwordDto
+
+            const createdPassword = new this.passwordModel({
+                email,
+                username,
+                password,
+            });
+
+            await createdPassword.save()
+
+            return { response: 'password saved successfully' }
+        } catch (err) {
+
         }
     }
 
