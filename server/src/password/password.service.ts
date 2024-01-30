@@ -62,7 +62,7 @@ export class PasswordService {
 
     async getPassword(email: string): Promise<{ res: any }> {
         try {
-            const passExists = await this.passwordModel.findOne({
+            const passExists = await this.passwordModel.find({
                 email: email,
             });
 

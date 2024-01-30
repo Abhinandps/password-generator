@@ -21,6 +21,7 @@ export class PasswordController {
         return await this.passwordService.savePassword(passwordDto)
     }
 
+
     @Get(':email')
     async getPassword(@Param('email') email: string) {
         return await this.passwordService.getPassword(email)
