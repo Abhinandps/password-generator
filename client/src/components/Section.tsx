@@ -13,6 +13,10 @@ import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import PopUp from './PopUp';
 
+import { useStore } from '../hooks/useStore'
+
+
+
 
 
 function Section() {
@@ -57,6 +61,7 @@ function Section() {
     const handleCopy = () => {
         setGeneratedPassword({ ...generatedPassword, copied: true })
     }
+
 
 
     return (
@@ -131,7 +136,7 @@ function Section() {
             <Filter passwordSettings={passwordSettings} setPopUp={setPopUp} handleSettingsChange={handleSettingsChange} />
 
             {popUp && (
-                <PopUp generatedPassword={generatedPassword} />
+                <PopUp generatedPassword={generatedPassword} setPopUp={setPopUp} notify={notify} />
             )}
         </>
     )

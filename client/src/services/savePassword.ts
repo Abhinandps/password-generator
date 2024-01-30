@@ -15,10 +15,12 @@ export const savePassword = async (passwordDto: any) => {
             console.log('status Password:', response.data);
             // return generatedPassword
         } else {
-            console.error('Error saving password:', response.statusText);
+            // throw new Error(response.data.message[0])
+            // console.error('Error generating password:', response.statusText);
         }
     } catch (error: any) {
-        console.error('Error saving password:', error.message);
+        throw new Error(error.response.data.message[0])
+        // console.error('Error generating password:', error.message);
     }
 };
 
