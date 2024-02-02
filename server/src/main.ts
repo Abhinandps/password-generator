@@ -5,11 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: '*', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    exposedHeaders: ['Content-Length'], 
-    credentials: true, 
+    origin: 'https://react-password-generator-umber.vercel.app',
   })
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3001);
