@@ -1,6 +1,6 @@
 
 <p align="center">
-    <h1 align="center">REACT-PASSWORD-GENERATOR</h1>
+    <h1 align="center">PASSWORD-GENERATOR</h1>
 </p>
 
 <!-- <p align="center">
