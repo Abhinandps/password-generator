@@ -32,7 +32,7 @@ function App() {
             useOneTap
             onSuccess={async (credentialResponse) => {
               const response = await axios.post(
-                'http://localhost:3001/login',
+                'https://react-password-generator-myca.vercel.app/login',
                 {
                   token: credentialResponse.credential,
                 }
