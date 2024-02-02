@@ -4,7 +4,7 @@ export const savePassword = async (passwordDto: any) => {
 
 
     try {
-        const response = await axios.post('http://localhost:3001/api/password/save', passwordDto, {
+        const response = await axios.post('https://react-password-generator-myca.vercel.app/api/password/save', passwordDto, {
             headers: {
                 'Content-Type': 'application/json',
             },
